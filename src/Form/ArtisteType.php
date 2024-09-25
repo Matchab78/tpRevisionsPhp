@@ -17,11 +17,11 @@ class ArtisteType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nom', TextType::class)
+            ->add('nom', TextType::class, ['label'=>"Nom de l'artiste",'attr'=>["placeholder"=>"saisir le nom de l'artiste"]])
             ->add('description', TextareaType::class)
             ->add('site', UrlType::class)
-            ->add('image', TextType::class)
-            ->add('type', ChoiceType::class, ["choice"=>["solo"=>0, "groupe"=>1]])
+            ->add('image', TextType::class, ['required'=>false])
+            ->add('type', ChoiceType::class, ["choices"=>["solo"=>0, "groupe"=>1]])
             //->add('valider', SubmitType::class)
         ;
     }
