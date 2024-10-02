@@ -19,7 +19,7 @@
     {% for leStyle in lesStyles %}
         {% set nbAlbums = leStyle.albums|length %}
             <tr> 
-                <td class="col-3">{{leStyle.couleur}}</td>
+                <td class="col-3"><span class="badge" style="display: inline-block; width: 25px; height: 15px; background-color: {{leStyle.couleur}}"></span></td>
                 <td class="col-5">{{leStyle.nom}}</td>
                 <td class="col-2">
                     <span class="align-self-center badge bg-dark"> {{nbAlbums}} {% if nbAlbums>1  %} albums {% else %} album {% endif %} </span>

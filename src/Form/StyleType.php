@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ColorType;
 
 class StyleType extends AbstractType
 {
@@ -20,7 +21,7 @@ class StyleType extends AbstractType
                     'placeholder'=>"Saisir le nom du style"
                 ]
             ])
-            ->add('couleur', TextType::class, [
+            ->add('couleur', ColorType::class, [
                 'required'=>false,
                 'label'=>"Couleur associé au style"
             ])

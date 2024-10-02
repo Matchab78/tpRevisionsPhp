@@ -12,9 +12,10 @@
 d'un style</h1>
 
 {{form_start(formStyle)}}
-
-{{form_row(formStyle.nom)}}
-{{form_row(formStyle.couleur)}}
+<div class="row">
+    <div class="col-8">{{form_row(formStyle.nom)}}</div>
+    <div class="col">{{form_row(formStyle.couleur)}}</div>
+</div>
 
 
 <div class="row">
