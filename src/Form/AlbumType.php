@@ -49,7 +49,10 @@ class AlbumType extends AbstractType
                 'label'=>"Style(s)",
                 'required'=>false,
                 'multiple'=>true, 
-                'by_reference'=>false
+                'by_reference'=>false,
+                'attr'=>[
+                    'class'=>"selectStyle"
+                ]
             ])
         ;
     }
