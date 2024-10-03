@@ -23,7 +23,6 @@
                     <li class="nav-item">
                         <a class="nav-link" href=" {{path('albums')}} ">Liste des albums</a>
                     </li>
-                
             {% endif %}
                     {% if app.user and is_granted('ROLE_ADMIN') %}
                         <li class="nav-item dropdown">
