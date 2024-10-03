@@ -29,6 +29,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    private $nom;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    private $prenom;
+
+    #[ORM\Column(type: 'integer')]
+    private $sexe;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $avatar;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -128,5 +140,57 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->isVerified = $isVerified;
 
         return $this;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): self
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getPrenom(): ?string
+    {
+        return $this->prenom;
+    }
+
+    public function setPrenom(string $prenom): self
+    {
+        $this->prenom = $prenom;
+
+        return $this;
+    }
+
+    public function getSexe(): ?int
+    {
+        return $this->sexe;
+    }
+
+    public function setSexe(int $sexe): self
+    {
+        $this->sexe = $sexe;
+
+        return $this;
+    }
+
+    public function getAvatar(): ?string
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar(?string $avatar): self
+    {
+        $this->avatar = $avatar;
+
+        return $this;
+    }
+
+    public function getFullName():string{
+        return $this->getNom()." ".$this->getPrenom();
     }
 }

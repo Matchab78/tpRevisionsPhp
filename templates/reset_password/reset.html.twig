@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réinitialiser votre mdp{% endblock %}
+
+{% block body %}
+    <h1>Réinitialiser votre mdp</h1>
+
+    {{ form_start(resetForm) }}
+        {{ form_row(resetForm.plainPassword) }}
+        <button class="btn btn-primary">Réinitialiser votre mdp</button>
+    {{ form_end(resetForm) }}
+{% endblock %}
