@@ -14,6 +14,9 @@
                 <h5 class="card-title">
                     <a href=" {{path('ficheArtiste', {'id': leAlbum.artiste.id})}} " class="badge bg-dark"> {{leAlbum.artiste.nom}} </a>
                 </h5>
+                <h5 class="card-title">
+                    <a href=" {{path('ficheLabel', {'id': leAlbum.label.id})}} " class="badge bg-dark"> {{leAlbum.label.nom}} </a>
+                </h5>
             </div>
             <img class="avatar mx-auto d-block" style="height: auto; width: 200px; display: block;" src=" {{leAlbum.image}} " alt="Card image">
             <div class="card-body">

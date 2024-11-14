@@ -2,45 +2,35 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use App\Repository\ArtisteRepository;
-use Doctrine\Common\Collections\Collection;
+use App\Repository\LabelRepository;
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: ArtisteRepository::class)]
-#[UniqueEntity(fields: ["nom"], message: "Le nom de l'artiste est déjà utilisé.")]
-class Artiste
+#[ORM\Entity(repositoryClass: LabelRepository::class)]
+class Label
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue(strategy:"IDENTITY")]
+    #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[NotBlank(message: "Le nom est obligatoire.")]
     private $nom;
 
     #[ORM\Column(type: 'text')]
-    #[Assert\Length(
-        min: 10, 
-        max: 15, 
-        minMessage: "La description doit comporter au moins {{ limit }} caractères.",
-        maxMessage: "La description ne peut pas dépasser {{ limit }} caractères."
-    )]    
     private $description;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $site;
-
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $image;
+    #[ORM\Column(type: 'integer')]
+    private $annee;
 
     #[ORM\Column(type: 'string', length: 255)]
     private $type;
 
-    #[ORM\OneToMany(mappedBy: 'artiste', targetEntity: Album::class)]
+    #[ORM\Column(type: 'string', length: 255)]
+    private $logo;
+
+    #[ORM\OneToMany(mappedBy: 'label', targetEntity: Album::class)]
     private $albums;
 
     public function __construct()
@@ -51,13 +41,6 @@ class Artiste
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function setId(int $id): self
-    {
-        $this->id = $id;
-
-        return $this;
     }
 
     public function getNom(): ?string
@@ -84,26 +67,14 @@ class Artiste
         return $this;
     }
 
-    public function getSite(): ?string
+    public function getAnnee(): ?int
     {
-        return $this->site;
+        return $this->annee;
     }
 
-    public function setSite(?string $site): self
+    public function setAnnee(int $annee): self
     {
-        $this->site = $site;
-
-        return $this;
-    }
-
-    public function getImage(): ?string
-    {
-        return $this->image;
-    }
-
-    public function setImage(?string $image): self
-    {
-        $this->image = $image;
+        $this->annee = $annee;
 
         return $this;
     }
@@ -120,6 +91,18 @@ class Artiste
         return $this;
     }
 
+    public function getLogo(): ?string
+    {
+        return $this->logo;
+    }
+
+    public function setLogo(string $logo): self
+    {
+        $this->logo = $logo;
+
+        return $this;
+    }
+
     /**
      * @return Collection<int, Album>
      */
@@ -132,7 +115,7 @@ class Artiste
     {
         if (!$this->albums->contains($album)) {
             $this->albums[] = $album;
-            $album->setArtiste($this);
+            $album->setLabel($this);
         }
 
         return $this;
@@ -142,8 +125,8 @@ class Artiste
     {
         if ($this->albums->removeElement($album)) {
             // set the owning side to null (unless already changed)
-            if ($album->getArtiste() === $this) {
-                $album->setArtiste(null);
+            if ($album->getLabel() === $this) {
+                $album->setLabel(null);
             }
         }
 

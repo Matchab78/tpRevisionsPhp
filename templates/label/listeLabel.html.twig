@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Labels{% endblock %}
+
+{% block body %}
+<h1 class="pt-2 text-center">Liste des Labels</h1>
+<hr>
+<div class="row pt-2">
+    {% for label in labels %}
+        <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4">
+            <div class="card mb-3">
+                <h3 class="card-header"> <a href=" {{path('ficheLabel', {'id': label.id})}} ">{{label.nom}}</a></h3>
+                <div class="card-body">
+                <h5 class="card-title">
+                    <a href=" {{path('ficheLabel', {'id': label.id})}} " class="badge bg-dark"> {{label.nom}} </a>
+                </h5>
+                <div class="card-body">
+                    <p class="card-text"> {{label.description|slice(0,200)|raw}}... </p>
+                </div>
+            </div>
+            <img class="avatar mx-auto d-block" style="height: 100px; width: 100px; display: block;" src=" {{label.logo}} " alt="Card image">
+            <div class="card-body">
+                <p class="card-text"> {{label.annee}} </p>
+                <p class="card-text">
+                    <span class="badge" style="background-color: {% if label.type == 'Indépendant' %}red{% else %}blue{% endif %};">
+                        {{ label.type }}
+                    </span>
+                </p>
+
+
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"> 
+                    {% set nb = label.albums|length %}
+                    {{ nb }} {% if nb > 1 %} albums {% else %} album {% endif %}
+                </li>
+            </ul>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
